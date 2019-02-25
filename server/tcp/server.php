@@ -28,12 +28,18 @@ $server->on('connect',function(swoole_server $server,int $fd){
 
 //注册消息接受监听事件
 $server->on('receive',function(swoole_server $server,int $fd,int $reactor_id, string $data){
-    echo '接收到新消息，长度：'.strlen($data).PHP_EOL;
+    $send_data = $data;
+    $data = unpack('N',$data);
+    $data = json_decode($data);
+    echo $data['msg'];
+    echo '开始向客户端发送应答';
+    $server->send($fd,string $send_data);
+    //echo '接收到新消息，长度：'.strlen($data).PHP_EOL;
 });
 
 //注册连接关闭监听事件
 $server->on('close',function(swoole_server $server,int $fd){
-    echo '消息已关闭'.PHP_EOL;
+    echo '连接已关闭'.PHP_EOL;
 });
 
 //启动服务
