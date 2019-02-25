@@ -23,7 +23,7 @@ swoole_timer_tick(9000,function () use($client){
     ];
     $data = json_encode($data);
     $send_data = pack('N',strlen($data)).$data;
-
+    echo '开始发送数据'.PHP_EOL;
     $client->send($send_data);
 
     //接受服务端返回信息
@@ -31,11 +31,11 @@ swoole_timer_tick(9000,function () use($client){
      * size 缓冲池大小
      * 是否等待所有数据到达后返回
      */
-    $res = $client->recv(1024 * 1024 * 2,1);
-    if(!$res){
-        echo '接受数据失败：'.PHP_EOL;
-        exit;
-    }
+    // $res = $client->recv(1024 * 1024 * 2,1);
+    // if(!$res){
+    //     echo '接受数据失败：'.PHP_EOL;
+    //     exit;
+    // }
 
     echo '数据接收成功'.PHP_EOL;
 });
