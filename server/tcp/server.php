@@ -21,10 +21,8 @@ $server->set(
     ]
 );
 
-$connect_fd = 0;
 //注册新连接监听事件
-$server->on('connect',function(swoole_server $server,int $fd) use(&$connect_fd){
-    $connect_fd = $fd;
+$server->on('connect',function(swoole_server $server,int $fd){
     echo '有新的连接进来：'.$fd.PHP_EOL;
 });
 
@@ -34,8 +32,7 @@ $server->on('receive',function(swoole_server $server,int $fd,int $reactor_id, st
 });
 
 //注册连接关闭监听事件
-echo '11111111:'.$connect_fd;
-$server->on('close',function(int $connect_fd){
+$server->on('close',function(swoole_server $server,int $fd){
     echo '消息已关闭'.PHP_EOL;
 });
 
