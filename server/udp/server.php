@@ -21,6 +21,7 @@ $server->set(
  */
 $server->on('packet',function (swoole_server $server,string $data,array $clientInfo){
     //var_dump($data,$clientInfo);
+    echo $data.PHP_EOL;
     $server->sendto($clientInfo['address'],$clientInfo['port'],'服务端数据包');
 });
 

@@ -11,3 +11,5 @@ $res = $client->recv(1024 * 1024 * 2,1);
 if(!$res){
     echo '接受数据失败'.PHP_EOL;
 }
+
+echo '接收应答成功'.PHP_EOL;
