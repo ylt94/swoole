@@ -18,7 +18,7 @@ $client->connect('127.0.0.1',9800);
 
 //发送数据
 $data = [
-    'msg' => '客户端发来数据',
+    'msg' => '客户端发来数据'.PHP_EOL,
 ];
 $data = json_encode($data);
 $send_data = pack('N',strlen($data)).$data;
@@ -35,4 +35,4 @@ $client->send($send_data);
 //     echo '接受数据失败：'.PHP_EOL;
 // }
 
-echo '数据接收成功';
+echo '数据接收成功'.PHP_EOL;
