@@ -21,18 +21,20 @@ $server->set(
     ]
 );
 
+$connect_fd = 0;
 //注册新连接监听事件
-$server->on('connect',function(swoole_server $server,int $fd){
+$server->on('connect',function(swoole_server $server,int $fd) use(&$connect_fd){
+    $connect_fd = $fd;
     echo '有新的连接进来：'.$fd.PHP_EOL;
 });
 
 //注册消息接受监听事件
-$server->on('receive',function(swoole_server $server,int $fd,int $reactor_id, sring $data){
+$server->on('receive',function(swoole_server $server,int $fd,int $reactor_id, string $data){
     echo '接收到新消息，长度：'.strlen($data).PHP_EOL;
 });
 
 //注册连接关闭监听事件
-$server->on('close',function(int $fd){
+$server->on('close',function(int $connect_fd){
     echo '消息已关闭'.PHP_EOL;
 });
 
