@@ -1,7 +1,7 @@
 <?php
 
 //实例化对象
-$server = new Swoole\Server('0.0.0.0',9800,SWOOLE_PROCESS,SWOOLE_SOCK_UDP);
+$server = new Swoole\Server('0.0.0.0',9801,SWOOLE_PROCESS,SWOOLE_SOCK_UDP);
 
 //设置
 $server->set(
@@ -20,8 +20,8 @@ $server->set(
  * 
  */
 $server->on('packet',function (swoole_server $server,string $data,array $clientInfo){
-    var_dump($data,$clientInfo);
-    $server->sendto($clientInfo['address'],$clientInfo['port'],"服务端数据包");
+    //var_dump($data,$clientInfo);
+    $server->sendto($clientInfo['address'],$clientInfo['port'],'服务端数据包');
 });
 
 //服务器开启
