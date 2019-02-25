@@ -33,7 +33,7 @@ $server->on('receive',function(swoole_server $server,int $fd,int $reactor_id, st
     $data = json_decode($data);
     echo $data['msg'];
     echo '开始向客户端发送应答';
-    $server->send($fd,string $send_data);
+    $server->send($fd,$send_data);
     //echo '接收到新消息，长度：'.strlen($data).PHP_EOL;
 });
 
