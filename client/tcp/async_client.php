@@ -3,8 +3,6 @@
 
 $client = new Swoole\Client(SWOOLE_SOCK_TCP,SWOOLE_SOCK_ASYNC);
 
-$client->connect('127.0.0.1',9800,1,0);
-
 //异步客户端必须注册所有事件
 
 //连接事件回调
@@ -28,7 +26,7 @@ $client->on("close", function(swoole_client $cli){
       echo "链接已关闭\n";
 });
 
-$client->connect('127.0.0.1', 9800) || exit("");
+$client->connect('127.0.0.1', 9800);
 
 //定时器,保持长连接
 swoole_timer_tick(3000,function () use($client){
