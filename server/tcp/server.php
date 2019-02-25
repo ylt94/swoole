@@ -29,8 +29,8 @@ $server->on('connect',function(swoole_server $server,int $fd){
 //注册消息接受监听事件
 $server->on('receive',function(swoole_server $server,int $fd,int $reactor_id, string $data){
     $send_data = $data;
-    $data = unpack('N',$data);
-    print_r($data);
+    $data = substr($data,4);
+    $data = json_decode($data,true);
     echo $data['msg'].PHP_EOL;
     echo '开始向客户端发送应答'.PHP_EOL;
     $server->send($fd,$send_data);
