@@ -10,8 +10,8 @@ $server->set(
     [
         'reactor_num' => 1,
         'worker_num' => 2,
-        'heartbeat_check_interval' => 30,//心跳检测间隔时间
-        'heartbeat_idle_time' => 70,//tcp允许最大闲置时间
+        'heartbeat_check_interval' => 3,//心跳检测间隔时间
+        'heartbeat_idle_time' => 7,//tcp允许最大闲置时间
         'open_length_check'=>1,
         'package_length_type'=>'N',//设置包头字节序
         'package_length_offset'=>0, //包长度从哪里开始计算
