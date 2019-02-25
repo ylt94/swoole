@@ -2,7 +2,7 @@
 
 
 //实例化对象
-$client = new Swoole\Client(SWOOLE_SOCK_TCP | SWOOLE_KEEP);
+$client = new Swoole\Client(SWOOLE_SOCK_TCP);
 
 //设置
 $client->set([
