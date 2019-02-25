@@ -25,20 +25,20 @@ swoole_timer_tick(9000,function () use($client){
     $send_data = pack('N',strlen($data)).$data;
 
     $client->send($send_data);
+
+    //接受服务端返回信息
+    /**
+     * size 缓冲池大小
+     * 是否等待所有数据到达后返回
+     */
+    $res = $client->recv(1024 * 1024 * 2,1);
+    if(!$res){
+        echo '接受数据失败：'.PHP_EOL;
+        exit;
+    }
+
+    echo '数据接收成功'.PHP_EOL;
 });
-
-//接受服务端返回信息
-/**
- * size 缓冲池大小
- * 是否等待所有数据到达后返回
- */
-$res = $client->recv(1024 * 1024 * 2,1);
-if(!$res){
-    echo '接受数据失败：'.PHP_EOL;
-    exit;
-}
-
-echo '数据接收成功'.PHP_EOL;
 
 // $close_res = $client->close();
 // if(!$close_res){
