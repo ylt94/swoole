@@ -17,16 +17,15 @@ $client->set([
 $client->connect('127.0.0.1',9800);
 //定时器,保持长连接
 swoole_timer_tick(9000,function () use($client){
-    $client->send('1');
-});
-//发送数据
-$data = [
-    'msg' => '客户端发来数据',
-];
-$data = json_encode($data);
-$send_data = pack('N',strlen($data)).$data;
+    //发送数据
+    $data = [
+        'msg' => '客户端发来数据',
+    ];
+    $data = json_encode($data);
+    $send_data = pack('N',strlen($data)).$data;
 
-$client->send($send_data);
+    $client->send($send_data);
+});
 
 //接受服务端返回信息
 /**
