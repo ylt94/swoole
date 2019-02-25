@@ -34,6 +34,7 @@ $server->on('receive',function(swoole_server $server,int $fd,int $reactor_id, st
 });
 
 //注册连接关闭监听事件
+echo '11111111:'.$connect_fd;
 $server->on('close',function(int $connect_fd){
     echo '消息已关闭'.PHP_EOL;
 });

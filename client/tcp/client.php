@@ -30,7 +30,7 @@ $client->send($send_data);
  * size 缓冲池大小
  * 是否等待所有数据到达后返回
  */
-$res = $client->recv(1024 * 1024 * 2, 1);
+$res = $client->recv();
 if(!$res){
     echo '接受数据失败：'.PHP_EOL;
 }
