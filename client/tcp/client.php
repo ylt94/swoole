@@ -15,7 +15,10 @@ $client->set([
 
 //连接服务端
 $client->connect('127.0.0.1',9800);
-
+//定时器,保持长连接
+swoole_timer_tick(9000,function () use($client){
+    $client->send('1');
+});
 //发送数据
 $data = [
     'msg' => '客户端发来数据',
