@@ -33,6 +33,14 @@ $client->send($send_data);
 $res = $client->recv(1024 * 1024 * 2,1);
 if(!$res){
     echo '接受数据失败：'.PHP_EOL;
+    exit;
 }
 
 echo '数据接收成功'.PHP_EOL;
+
+$close_res = $client->close();
+if(!$close_res){
+    echo '连接关闭失败';
+    exit;
+}
+ echo '连接关闭成功';
