@@ -1,7 +1,7 @@
 <?php
 
 
-$client = Swoole\Client(SWOOLE_SOCK_TCP,SWOOLE_SOCK_ASYNC);
+$client = new Swoole\Client(SWOOLE_SOCK_TCP,SWOOLE_SOCK_ASYNC);
 
 $client->connect('127.0.0.1',9800,1,0);
 
