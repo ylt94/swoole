@@ -34,6 +34,13 @@ $server->on('receive',function(swoole_server $server,int $fd,int $reactor_id, st
     echo $data['msg'].PHP_EOL;
     echo '开始向客户端发送应答'.PHP_EOL;
     $server->send($fd,$send_data);
+
+    //广播
+    echo '开始广播udp';
+    $udp_client = new Swoole\Client(SWOOLE_SOCK_UDP);
+    $udp_client->sendto('127.0.0.1',9801,'我是客户端');
+    echo '广播发送完毕';
+    //$res = $udp_client->recv(1024 * 1024 * 2,1);
     //echo '接收到新消息，长度：'.strlen($data).PHP_EOL;
 });
 

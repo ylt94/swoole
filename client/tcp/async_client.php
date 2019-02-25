@@ -3,7 +3,7 @@
 
 $client = new Swoole\Client(SWOOLE_SOCK_TCP,SWOOLE_SOCK_ASYNC);
 
-//异步客户端必须注册所有事件
+//异步客户端连接服务器之前必须注册所有事件
 
 //连接事件回调
 $client->on("connect", function(swoole_client $cli){
