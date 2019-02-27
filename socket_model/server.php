@@ -15,10 +15,6 @@ class worker{
         $this->socket = stream_socket_server($socket_address);
     }
 
-    public function __call($name, $arguments){
-        echo '方法：'.$name.'不存在';
-    }
-
     //注册回调事件
     public function on(string $method,Closure $func){
 
@@ -37,15 +33,19 @@ class worker{
         }
 
         while(true){
+
+            //阻塞监听进来的连接
             $accept = stream_socket_accept($this->socket);
             if($accept && $this->on_methods['connect']){
                 $this->callBackAction($this->on_methods['connect'],$accept);
             }
-        }
-
-        $content = fread($accept,65535);
-        if($content && $this->on_methods['connect']){
-            $this->callBackAction($this->on_methods['connect'],$content);
+        
+            //处理信息
+            $content = fread($accept,65535);
+            if($content && $this->on_methods['receive']){
+                $this->callBackAction($this->on_methods['receive'],$content);
+            }
+            usleep(500);
         }
     }
 
