@@ -55,6 +55,8 @@ class worker{
         return array_key_exists($method,$this->on_methods);
     }
 
+
+    //执行回调函数
     private function callBackAction(Closure $method,$param){
         call_user_func($method,$param);
     }
