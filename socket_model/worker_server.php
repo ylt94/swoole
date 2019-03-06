@@ -63,7 +63,7 @@ class worker{
             ),
         );
         $context = stream_context_create($opetions);
-        //开启多端口监听,并且实现负载均衡(计算机内核自动实现)
+        //开启多端口监听,并且实现负载均衡(计算机内核自动实现),防止惊群
         stream_context_set_option($context,'socket','so_reuseport',1);
         stream_context_set_option($context,'socket','so_reuseaddr',1);
         $this->server=stream_socket_server($this->server_address,$errno,$errstr,STREAM_SERVER_BIND|STREAM_SERVER_LISTEN,$context);
