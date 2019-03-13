@@ -33,8 +33,8 @@ $server->on('connect',function(swoole_server $server,int $fd){
 //注册消息接受监听事件
 $server->on('receive',function(swoole_server $server,int $fd,int $reactor_id, string $data){
     $send_data = $data;
-    // $data = substr($data,4);
-    // $data = json_decode($data,true);
+    $data = substr($data,4);
+    $data = json_decode($data,true);
     // echo $data['msg'].PHP_EOL;
     // echo '开始向客户端发送应答'.PHP_EOL;
     // $server->send($fd,$send_data);
@@ -51,7 +51,12 @@ $server->on('receive',function(swoole_server $server,int $fd,int $reactor_id, st
 
 $server->on('task',function(swoole_server $server, int $task_id, int $src_worker_id, mixed $data){
     echo 'task进程接收到任务,task_id:'.$task_id.'src_worker_id:'.$src_worker_id.PHP_EOL;
-    
+    echo $data['msg'];
+    $server->finish('task任务执行完成');
+});
+
+$server->on('finish',function(swoole_server $server, int $task_id, string $data){
+    echo 'task任务执行返回结果:'.$data.PHP_EOL;
 });
 
 //注册连接关闭监听事件
