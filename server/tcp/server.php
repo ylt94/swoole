@@ -30,7 +30,7 @@ $server->set(
 
 //注册新连接监听事件
 $server->on('connect',function(swoole_server $server,int $fd){
-    echo '有新的连接进来：'.$fd.PHP_EOL;
+    //echo '有新的连接进来：'.$fd.PHP_EOL;
 });
 
 //注册消息接受监听事件
