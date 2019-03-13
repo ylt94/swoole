@@ -46,8 +46,12 @@ $server->on('receive',function(swoole_server $server,int $fd,int $reactor_id, st
     // echo '广播发送完毕'.PHP_EOL;
     //$res = $udp_client->recv(1024 * 1024 * 2,1);
     //echo '接收到新消息，长度：'.strlen($data).PHP_EOL;
-    $task_id = rand(0,1);
-    $server->task($data,$task_id);//task_id = (0,task_worker_num-1)
+
+    //$task_id = rand(0,1);
+    //$server->task($data,$task_id);//task_id = (0,task_worker_num-1)
+
+    $worker_id = rand(0,1);
+    $server->sendMessage('进程发送给进程',$worker_id);
 });
 
 $server->on('task',function(swoole_server $server, int $task_id, int $src_worker_id,$data){
@@ -58,7 +62,9 @@ $server->on('task',function(swoole_server $server, int $task_id, int $src_worker
             throw new Exception('程序执行异常！');
         }
     }catch(\Exception $e){
-        $server->sendMessage($e->getMessage(), 4);//task进程内无法发送消息给task进程
+        //只能发送给worker进程
+        $worker_id = rand(0,1);
+        $server->sendMessage($e->getMessage(),$worker_id);//task进程内无法发送消息给task进程
     }
     echo $data['msg'];
     $server->finish('task任务执行完成');
