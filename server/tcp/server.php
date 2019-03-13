@@ -10,7 +10,7 @@ $server->set(
     [
         'reactor_num' => 1,
         'worker_num' => 2,
-        'task_work_num' => 2,
+        'task_worker_num' => 2,
         'task_ip_mode' => 2,
         'message_queue_key' => ftok(__DIR__,1),
         'heartbeat_check_interval' => 3,//心跳检测间隔时间
