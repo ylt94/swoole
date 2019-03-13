@@ -46,17 +46,33 @@ $server->on('receive',function(swoole_server $server,int $fd,int $reactor_id, st
     // echo '广播发送完毕'.PHP_EOL;
     //$res = $udp_client->recv(1024 * 1024 * 2,1);
     //echo '接收到新消息，长度：'.strlen($data).PHP_EOL;
-    $server->task($data,0);
+    $task_id = rand(0,1);
+    $server->task($data,$task_id);
 });
 
 $server->on('task',function(swoole_server $server, int $task_id, int $src_worker_id,$data){
     echo 'task进程接收到任务,task_id:'.$task_id.'src_worker_id:'.$src_worker_id.PHP_EOL;
+    try{
+        $task_worker_id = $server->worker_id;
+        if($task_worker_id%2){
+            throw new Exception('程序执行异常！');
+        }
+    }catch(\Exception $e){
+        $server->sendMessage($e->getMessage(), 1);
+    }
     echo $data['msg'];
     $server->finish('task任务执行完成');
 });
 
 $server->on('finish',function(swoole_server $server, int $task_id,$data){
     echo 'task任务执行返回结果:'.$data.PHP_EOL;
+});
+
+$server->on('pipeMessage',function(swoole_server $server, int $src_worker_id,$message){
+    echo 'task进程执行异常：'.$message.'worker_id:'.$src_worker_id.PHP_EOL;
+    //echo '异常任务重新发送'.PHP_EOL;
+    //$task_id = rand(0,1);
+    //$server->task($data,$task_id);
 });
 
 //注册连接关闭监听事件
