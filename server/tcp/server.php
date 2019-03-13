@@ -127,7 +127,7 @@ $server_class->on("receive",function($server_class,$fd,$from_id,$data){
 });
 $server_class->on("task",function($server_class,$task_id,$from_id,$data){
 
-      $server_class->sendMessage("123",5);
+      $server_class->sendMessage("123",3);
 
 });
 $server_class->on("PipeMessage",function(swoole_server $server_class,int $src_worker_id,$message){
