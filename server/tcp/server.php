@@ -98,8 +98,9 @@
 //创建server对象，监听所有本机9501端口，允许所有IP客户端连接
 $server_class = new swoole_server("0.0.0.0",9800);
 $server_class->set([
-	"worker_num"=>4,
-	"task_worker_num"=>4,
+    'reactor_num' => 1,
+	"worker_num"=>2,
+	"task_worker_num"=>2,
 	"open_length_check"=>true,
 	"package_length_type"=>"N",
 	"package_length_offset"=>0,
