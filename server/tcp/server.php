@@ -8,7 +8,7 @@ $server = new Swoole\Server('0.0.0.0','9800',SWOOLE_PROCESS,SWOOLE_SOCK_TCP);
 //设置
 $server->set(
     [
-        'reactor_num' => 1,
+        //'reactor_num' => 1,
         'worker_num' => 2,
         'task_worker_num' => 2,
         // 'enable_coroutine' => true,
@@ -77,7 +77,7 @@ $server->on('finish',function(swoole_server $server, int $task_id,$data){
     echo 'task任务执行返回结果:'.$data.PHP_EOL;
 });
 
-$server->on('pipeMessage',function(swoole_server $server, int $src_worker_id,$message){
+$server->on('PipeMessage',function(swoole_server $server, int $src_worker_id,$message){
     echo 'task进程执行异常：'.$message.'worker_id:'.$src_worker_id.PHP_EOL;
     //echo '异常任务重新发送'.PHP_EOL;
     //$task_id = rand(0,1);
@@ -144,4 +144,4 @@ if(!$ser_star_res){
 // });
 // //启动服务器
 // $server_class->start();
-// ?>
+?>
