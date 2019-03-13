@@ -51,7 +51,7 @@ $server->on('receive',function(swoole_server $server,int $fd,int $reactor_id, st
     //$server->task($data,$task_id);//task_id = (0,task_worker_num-1)
 
     $worker_id = rand(0,1);
-    $server->sendMessage('进程发送给进程',$worker_id);
+    $server->sendMessage('worker进程发送给task进程',$worker_id);
 });
 
 $server->on('task',function(swoole_server $server, int $task_id, int $src_worker_id,$data){
