@@ -21,7 +21,7 @@ $server->set(
         'package_body_offset'=>4,  //包体从第几个字节开始计算
         'package_max_length'=>1024 * 1024 * 3,
         'buffer_output_size'=>1024 * 1024 * 3, //输出缓冲区的大小
-        'daemonize' => 1 //守护进程化
+        //'daemonize' => 1 //守护进程化
     ]
 );
 
