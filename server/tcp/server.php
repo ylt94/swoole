@@ -49,13 +49,13 @@ $server->on('receive',function(swoole_server $server,int $fd,int $reactor_id, st
     $server->task($data,0);
 });
 
-$server->on('task',function(swoole_server $server, int $task_id, int $src_worker_id, mixed $data){
+$server->on('task',function(swoole_server $server, int $task_id, int $src_worker_id,$data){
     echo 'task进程接收到任务,task_id:'.$task_id.'src_worker_id:'.$src_worker_id.PHP_EOL;
     echo $data['msg'];
     $server->finish('task任务执行完成');
 });
 
-$server->on('finish',function(swoole_server $server, int $task_id, string $data){
+$server->on('finish',function(swoole_server $server, int $task_id,$data){
     echo 'task任务执行返回结果:'.$data.PHP_EOL;
 });
 
