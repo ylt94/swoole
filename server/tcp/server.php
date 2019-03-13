@@ -11,7 +11,7 @@ $server->set(
         'reactor_num' => 1,
         'worker_num' => 2,
         'task_worker_num' => 2,
-        'task_ip_mode' => 2,
+        //'task_ip_mode' => 2,
         'message_queue_key' => ftok(__DIR__,1),
         'heartbeat_check_interval' => 3,//心跳检测间隔时间
         'heartbeat_idle_time' => 7,//tcp允许最大闲置时间
@@ -47,8 +47,8 @@ $server->on('receive',function(swoole_server $server,int $fd,int $reactor_id, st
     //$res = $udp_client->recv(1024 * 1024 * 2,1);
     //echo '接收到新消息，长度：'.strlen($data).PHP_EOL;
 
-    $task_id = rand(0,1);
-    $server->task($data,$task_id);//task_id = (0,task_worker_num-1)
+    //$task_id = rand(0,1);
+    $server->task($data);//task_id = (0,task_worker_num-1)
 
     // $worker_id = rand(0,1);
     // $server->sendMessage('进程发送给task进程',3);
