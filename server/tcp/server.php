@@ -56,7 +56,7 @@ $server->on('receive',function(swoole_server $server,int $fd,int $reactor_id, st
     // $server->sendMessage('进程发送给task进程',3);
 });
 
-$server->on('task',function(swoole_server $server, int $task_id, int $src_worker_id,$data){
+$server->on('task',function(swoole_server $server, $task_id,$src_worker_id,$data){
     $server->sendMessage($data,3);
     // echo 'task进程接收到任务,task_id:'.$task_id.'src_worker_id:'.$src_worker_id.PHP_EOL;
     // $task_worker_id = $server->worker_id;
