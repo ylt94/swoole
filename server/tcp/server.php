@@ -46,7 +46,7 @@ $server->on('receive',function(swoole_server $server,int $fd,int $reactor_id, st
     // echo '广播发送完毕'.PHP_EOL;
     //$res = $udp_client->recv(1024 * 1024 * 2,1);
     //echo '接收到新消息，长度：'.strlen($data).PHP_EOL;
-    $server->task($data,2);
+    $server->task($data,0);
 });
 
 $server->on('task',function(swoole_server $server, int $task_id, int $src_worker_id, mixed $data){
