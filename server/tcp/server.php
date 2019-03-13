@@ -85,7 +85,7 @@ $server->on('task',function(swoole_server $server, $task_id,$src_worker_id,$data
 });
 
 $server->on('PipeMessage',function(swoole_server $server, int $src_worker_id,$message){
-    echo 'task进程执行异常：'.$message.'worker_id:'.$src_worker_id.PHP_EOL;
+    echo "来自于".$src_worker_id.PHP_EOL;
     //echo '异常任务重新发送'.PHP_EOL;
     //$task_id = rand(0,1);
     //$server->task($data,$task_id);
