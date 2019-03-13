@@ -55,19 +55,20 @@ $server->on('receive',function(swoole_server $server,int $fd,int $reactor_id, st
 });
 
 $server->on('task',function(swoole_server $server, int $task_id, int $src_worker_id,$data){
-    echo 'task进程接收到任务,task_id:'.$task_id.'src_worker_id:'.$src_worker_id.PHP_EOL;
-    $task_worker_id = $server->worker_id;
-    try{
-        if($task_worker_id%2){
-            throw new Exception('程序执行异常！');
-        }
-    }catch(\Exception $e){
-        //只能发送给worker进程
-        $worker_id = rand(0,1);
-        $server->sendMessage($e->getMessage(),$task_worker_id);//task进程内无法发送消息给task进程
-    }
-    echo $data['msg'];
-    $server->finish('task任务执行完成');
+    $server->sendMessage($data,$server->worker_id);
+    // echo 'task进程接收到任务,task_id:'.$task_id.'src_worker_id:'.$src_worker_id.PHP_EOL;
+    // $task_worker_id = $server->worker_id;
+    // try{
+    //     if($task_worker_id%2){
+    //         throw new Exception('程序执行异常！');
+    //     }
+    // }catch(\Exception $e){
+    //     //只能发送给worker进程
+    //     $worker_id = rand(0,1);
+    //     $server->sendMessage($e->getMessage(),$task_worker_id);//task进程内无法发送消息给task进程
+    // }
+    // echo $data['msg'];
+    // $server->finish('task任务执行完成');
 });
 
 $server->on('finish',function(swoole_server $server, int $task_id,$data){
