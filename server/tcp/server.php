@@ -101,8 +101,8 @@
 $server_class = new swoole_server("0.0.0.0",9800);
 $server_class->set([
     'reactor_num' => 1,
-	"worker_num"=>4,
-	"task_worker_num"=>4,
+	"worker_num"=>2,
+	"task_worker_num"=>2,
 	"open_length_check"=>true,
 	"package_length_type"=>"N",
 	"package_length_offset"=>0,
@@ -129,7 +129,7 @@ $server_class->on("receive",function($server_class,$fd,$from_id,$data){
 });
 $server_class->on("task",function($server_class,$task_id,$from_id,$data){
 
-      $server_class->sendMessage("123",6);
+      $server_class->sendMessage("123",3);
 
 });
 $server_class->on("PipeMessage",function(swoole_server $server_class,int $src_worker_id,$message){
