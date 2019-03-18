@@ -1,0 +1,25 @@
+{
+    "name": "test",
+    "description": "test",
+    "keywords": [
+      "php",
+      "swoole",
+      "ylt"
+    ],
+    "authors": [
+      {
+        "name": "ylt",
+        "email": "857425891@qq.com"
+      }
+    ],
+    "autoload": {
+      "psr-4": {
+         "Core\\": "core/",
+         "App\\": "app/"
+      }
+    },
+    "require": {
+      "php": ">=7.0",
+      "ext-swoole":">=4.0"
+    }
+  }
