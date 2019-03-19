@@ -16,7 +16,7 @@ class HttpServer {
 
 
     public function __construct(){
-       $this->server_config = Init::$config['swoole_http'];print_r($this->server_config);exit;
+       $this->server_config = Init::$config['swoole_http'];
     }
 
     public function run(){
