@@ -33,7 +33,7 @@ class Reload{
     public function getMd5(){
         $md5='';
         //3秒钟之内去比较当前的文件散列值跟上一次文件的散列值
-        foreach ($this->watch_path as $dir){
+        foreach ($this->watch_files as $dir){
             $md5.= $this->md5File($dir);
         }
         return $md5;
