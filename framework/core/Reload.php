@@ -25,6 +25,7 @@ class Reload{
         $this->md5_file = $md5;
         
         if($old_md5_flie && $old_md5_flie != $md5){
+            echo '检测到文件更新'.PHP_EOL;
             echo '原散列值：'.$old_md5_flie.PHP_EOL;
             echo '现散列值：'.$md5.PHP_EOL;
             return false;
