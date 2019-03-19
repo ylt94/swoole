@@ -52,8 +52,7 @@ class HttpServer {
             $response->status(404);
             $response->end();
         }else{
-            $this->reload();
-            $response->end('peter');
+            $response->end('test');
         }
     }
 
