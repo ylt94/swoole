@@ -34,10 +34,11 @@ class HttpServer {
 
     public function HotReload(){
         $reload = new Reload();
-        swoole_timer_tick(3000,function () use ($reload){
+        $server = $this->server;
+        swoole_timer_tick(3000,function () use ($server,$reload){
 
             if(!$reload->FilesCheck()){
-                $this->server->reload();
+                $server->reload();
             };
            
 
