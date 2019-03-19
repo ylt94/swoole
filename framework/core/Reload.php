@@ -17,7 +17,7 @@ class Reload{
         
     }
 
-    public function FileCheck(){
+    public function FilesCheck(){
 
         $md5 = $this->getMd5();
 
