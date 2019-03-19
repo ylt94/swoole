@@ -52,7 +52,7 @@ class HttpServer {
             $response->status(404);
             $response->end();
         }else{
-            $response->end('test');
+            $response->end('test'.PHP_EOL);
         }
     }
 
