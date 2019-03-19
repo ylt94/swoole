@@ -22,7 +22,7 @@ class HttpServer {
     public function run(){
         $this->server=new Server($this->server_config['server']['host'],$this->server_config['server']['port']);
 
-        $this->server->set($this->server_config['config']);
+        $this->server->set($this->server_config['server']['config']);
         $this->server->on('request',[$this,'request']);
         $this->server->on('Start',[$this,'start']);
         $this->server->on('workerStart',[$this,'workerStart']);
