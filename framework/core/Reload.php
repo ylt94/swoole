@@ -34,6 +34,7 @@ class Reload{
         $md5='';
         //3秒钟之内去比较当前的文件散列值跟上一次文件的散列值
         foreach ($this->watch_files as $dir){
+            echo '开始检测：'.$dir.PHP_EOL;
             $md5.= $this->md5File($dir);
         }
         return $md5;
