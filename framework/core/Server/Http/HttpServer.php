@@ -16,11 +16,11 @@ class HttpServer {
 
 
     public function __construct(){
-       $this->server_config = Init::$config['swoole_http'];
+       $this->server_config = Init::$config['swoole_http'];print_r($this->server_config);exit;
     }
 
     public function run(){
-        $this->server=new Server($this->server_config['host'],$this->server_config['port']);
+        $this->server=new Server($this->server_config['server']['host'],$this->server_config['server']['port']);
 
         $this->server->set($this->server_config['config']);
         $this->server->on('request',[$this,'request']);
