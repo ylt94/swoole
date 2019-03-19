@@ -34,7 +34,7 @@ class HttpServer {
 
     public function HotReload(){
         $reload = new Reload();
-        swoole_timer_tick(3000,function ($reload){
+        swoole_timer_tick(3000,function () use ($reload){
 
             if(!$reload->FilesCheck()){
                 $this->server->reload();
