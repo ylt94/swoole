@@ -33,4 +33,18 @@ class Route{
         self::$route['post'][$path] = $params;
     }
 
+    public static function getNameSpaceByPath(string $path, string $method = ''){
+        $list = [];
+        if($method){
+            $list = self::$route[$method];
+        }else{
+            foreach(self::$route as $val){
+                $list = array_merge($list,$val);
+            }
+            
+        }
+
+        return isset($list[$path]) ? $list[$path] : null;
+    }
+
 }
