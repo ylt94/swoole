@@ -6,7 +6,8 @@ namespace Core\Server\Http;
 use Core\Init;
 use Swoole\Http\Server;
 use Core\Reload;
-
+use Core\RequestHandle\HttpHandle;
+use Core\Server\Rpc\RpcServer;
 
 class HttpServer {
 
@@ -16,21 +17,24 @@ class HttpServer {
 
 
     public function __construct(){
-       $this->server_config = Init::$config['swoole_http'];
+       $this->server_config = Init::$config['http']['server'];
     }
 
     public function run(){
-        $this->server=new Server($this->server_config['server']['host'],$this->server_config['server']['port']);
+        $this->server=new Server($this->server_config['host'],$this->server_config['port']);
 
-        $this->server->set($this->server_config['server']['config']);
+        $this->server->set($this->server_config['setting']);
         $this->server->on('request',[$this,'request']);
         $this->server->on('Start',[$this,'start']);
         $this->server->on('workerStart',[$this,'workerStart']);
 
-
+        //启动rpc
+        if(isset($this->server_config['enable_tcp']) && $this->server_config['enable_tcp']){
+            RpcServer::listen($this->server,Init::$config['tcp']['server']);
+        }
         $this->server->start();
     }
-
+    
 
     public function HotReload(){
         $reload = new Reload();
@@ -46,14 +50,8 @@ class HttpServer {
     }
 
     public  function  request($request,$response){
-        $uri = $request->server['request_uri'];
-
-        if ($uri == '/favicon.ico') {
-            $response->status(404);
-            $response->end();
-        }else{
-            $response->end('test11'.PHP_EOL);
-        }
+        
+        HttpHandle::dispatch($request,$response);
     }
 
     public  function  start($server){
