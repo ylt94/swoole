@@ -2,8 +2,6 @@
 
 namespace Core;
 
-use Core\Init;
-
 class Route{
 
     private static $instance;
