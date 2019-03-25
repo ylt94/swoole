@@ -6,6 +6,7 @@ use Core\Init;
 use Core\Server\Http\HttpServer;
 use Swoole\WebSocket\Server;
 use Core\RequestHandle\WebSocketHandle;
+use Core\RequestHandle\WebSocketContext;
 
 class WebSocketServer extends HttpServer{
 
