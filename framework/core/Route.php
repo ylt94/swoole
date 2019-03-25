@@ -7,8 +7,8 @@ class Route{
     private static $instance;
     private static $route;
 
-    public function __construct(){
-        return self::getInstance();
+    private function __construct(){
+        
     }
 
     public function __clone(){
