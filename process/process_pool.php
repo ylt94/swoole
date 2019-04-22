@@ -18,4 +18,3 @@ $pool->on("WorkerStop", function ($pool, $workerId) {
 
 
 $pool->start();
-var_dump(1111111111111111111);
