@@ -30,4 +30,3 @@ $pool2->on("WorkerStop", function ($pool, $workerId) {
 
 $pool1->start();
 $pool2->start();
-swoole_set_process_name('process_pool');
