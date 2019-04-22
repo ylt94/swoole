@@ -4,18 +4,30 @@ use Swoole\Process\Pool;
 use Swoole\Process;
 
 
-$pool = new Pool(1);
+$pool1 = new Pool(1);
+$pool2 = new Pool(2);
 
-$pool->on('WorkerStart',function($pool,$workerId){
+$pool1->on('WorkerStart',function($pool,$workerId){
     //echo var_dump($pool);
     //echo 'workerid:'.$workerId.PHP_EOL;
     sleep(20);
 });
 
-$pool->on("WorkerStop", function ($pool, $workerId) {
+$pool1->on("WorkerStop", function ($pool, $workerId) {
+    echo "Worker#{$workerId} is stopped\n".PHP_EOL;
+});
+
+$pool2->on('WorkerStart',function($pool,$workerId){
+    //echo var_dump($pool);
+    echo 'workerid:'.$workerId.PHP_EOL;
+    sleep(20);
+});
+
+$pool2->on("WorkerStop", function ($pool, $workerId) {
     echo "Worker#{$workerId} is stopped\n".PHP_EOL;
 });
 
 
-$pool->start();
+$pool1->start();
+$pool2->start();
 swoole_set_process_name('process_pool');
