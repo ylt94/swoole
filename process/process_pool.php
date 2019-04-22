@@ -3,7 +3,7 @@
 use Swoole\Process\Pool;
 use Swoole\Process;
 
-Process::daemon();
+
 $pool = new Pool(1);
 
 $pool->on('WorkerStart',function($pool,$workerId){
@@ -18,3 +18,4 @@ $pool->on("WorkerStop", function ($pool, $workerId) {
 
 
 $pool->start();
+var_dump(1111111111111111111);
