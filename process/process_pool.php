@@ -28,5 +28,5 @@ $pool2->on("WorkerStop", function ($pool, $workerId) {
 });
 
 
-$pool2->start();
 $pool1->start();
+$pool2->start();
