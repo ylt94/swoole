@@ -3,6 +3,7 @@
 use Swoole\Process\Pool;
 use Swoole\Process;
 
+Process::daemon();
 $pool = new Pool(10);
 
 $pool->on('WorkerStart',function($pool,$workerId){
@@ -12,4 +13,3 @@ $pool->on('WorkerStart',function($pool,$workerId){
 });
 
 $pool->start();
-Process::daemon();
