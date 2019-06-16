@@ -31,7 +31,7 @@ class HttpServer {
 
         //启动rpc
         if(isset($this->server_config['enable_tcp']) && $this->server_config['enable_tcp']){
-            RpcServer::listen($this->server,Init::$config['tcp']['server']);
+            //RpcServer::listen($this->server,Init::$config['tcp']['server']);
         }
         $this->server->start();
     }
