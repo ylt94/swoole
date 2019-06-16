@@ -50,18 +50,17 @@ class HttpServer {
     }
 
     public  function  request($request,$response){
-        
-        HttpHandle::dispatch($request,$response);
+        echo 'http request'.PHP_EOL;
+        //HttpHandle::dispatch($request,$response);
     }
 
     public  function  start($server){
-
-           $this->HotReload();
+        echo 'http server start'.PHP_EOL;
+        //$this->HotReload();
 
     }
     
     public  function  workerStart($server,$worker_id){
-
-
+        echo 'http worker start'.PHP_EOL;
     }
 }

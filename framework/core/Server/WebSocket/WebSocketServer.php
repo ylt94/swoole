@@ -47,24 +47,27 @@ class WebSocketServer extends HttpServer{
     }
 
     public  function open($server,$request){
-            $path=$request->server['path_info'];
-            $fd=$request->fd;
-            WebSocketContext::init($fd,$path); //保存了上下文信息
-            //触发到控制器,路由
-            WebSocketHandle::open($server,$request,$path);
+            // $path=$request->server['path_info'];
+            // $fd=$request->fd;
+            // WebSocketContext::init($fd,$path); //保存了上下文信息
+            // //触发到控制器,路由
+            // WebSocketHandle::open($server,$request,$path);
+            echo 'ws open'.PHP_EOL;
 
     }
 
     public  function message($server,$frame){
         //var_dump($request->server['path_info']);
         $fd=$frame->fd;
-        $path=WebSocketContext::get($fd);
-        var_dump($path);
+        echo 'ws message'.PHP_EOL;
+        //$path=WebSocketContext::get($fd);
+        //var_dump($path);
     }
 
     public  function close($server,$fd){
        // var_dump($request->server['path_info']);
         $path=WebSocketContext::get($fd);
+        echo 'ws close'.PHP_EOL;
         var_dump($path);
 
     }
