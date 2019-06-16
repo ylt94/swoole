@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\WebSocket;
+namespace Core\Server\WebSocket;
 
 use Core\Init;
 use Core\Server\Http\HttpServer;
