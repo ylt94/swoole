@@ -27,6 +27,7 @@ class HttpServer {
         $this->server->on('request',[$this,'request']);
         $this->server->on('Start',[$this,'start']);
         $this->server->on('workerStart',[$this,'workerStart']);
+        $this->server->on('shutdown',[$this,'shutdown']);
 
         //启动rpc
         if(isset($this->server_config['enable_tcp']) && $this->server_config['enable_tcp']){
