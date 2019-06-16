@@ -63,4 +63,8 @@ class HttpServer {
     public  function  workerStart($server,$worker_id){
         echo 'http worker start'.PHP_EOL;
     }
+
+    public function shutdown(\swoole_server $server){
+        echo 'http server stop'.PHP_EOL;
+    }
 }
