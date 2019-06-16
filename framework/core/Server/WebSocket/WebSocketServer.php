@@ -27,6 +27,7 @@ class WebSocketServer extends HttpServer{
         $this->server->on('open',[$this,'open']);
         $this->server->on('message',[$this,'message']);
         $this->server->on('close',[$this,'close']);
+        $this->server->on('shutdown',[$this,'shutdown']);
 
         //启动http服务
         if (isset($this->server_config['enable_http']) && $this->server_config['enable_http']) {
@@ -70,6 +71,10 @@ class WebSocketServer extends HttpServer{
         echo 'ws close'.PHP_EOL;
         var_dump($path);
 
+    }
+
+    public function shutdown(\swoole_server $server){
+        echo 'ws server stop'.PHP_EOL;
     }
 
 }
