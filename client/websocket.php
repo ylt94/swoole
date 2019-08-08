@@ -7,6 +7,12 @@ $cli->setHeaders([
     'Accept' => 'text/html,application/xhtml+xml,application/xml',
     'Accept-Encoding' => 'gzip',
 ]);
+//异步回调客户端
+$client->on("receive", function(swoole_client $cli, $data){
+    echo '已获取到服务端返回数据：'.$data;
+   //$cli->send(str_repeat('A', 100)."\n");
+
+});
 $cli->upgrade('/', function ($cli) {
     $cli->push("hello world");
 });
