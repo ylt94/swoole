@@ -20,6 +20,21 @@ class Test{
         //         echo "PID={$ret['pid']}\n";
         //     }
         // });
+        $this->processWait();
+        
+    }
+
+    public function createProcess($i){
+        $process = new Process(function(\swoole_process $process) use($i){
+            while(true){
+                sleep(10);
+            }
+        });
+        $process->start();
+        return $process;
+    }
+
+    public function processWait(){
         $ws_obj = $this;
         \swoole_process::signal(SIGCHLD, function($sig) use($ws_obj) {
             //必须为false，非阻塞模式
@@ -42,16 +57,6 @@ class Test{
                 }
             }
         });
-    }
-
-    public function createProcess($i){
-        $process = new Process(function(\swoole_process $process) use($i){
-            while(true){
-                sleep(10);
-            }
-        });
-        $process->start();
-        return $process;
     }
 }
 
