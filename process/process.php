@@ -40,7 +40,7 @@ class Test{
         \swoole_process::signal(SIGCHLD, function($sig) use($ws_obj) {
             //必须为false，非阻塞模式
             while($kill_msg =  \swoole_process::wait(false)) {
-                \Log::info('子进程被杀掉，信息：'.var_export($kill_msg,true));
+                var_dump('子进程被杀掉，信息：'.var_export($kill_msg,true));
                 $process = $ws_obj::$process;
                 foreach($process as $market => $val){
                     foreach($val as $key => $pid){
