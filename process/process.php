@@ -19,8 +19,7 @@ class Test{
     public function createProcess($i){
         $process = new Process(function(\swoole_process $process) use($i){
             while(true){
-                echo 'i------>'.$i;
-                sleep(5);
+                sleep(10);
             }
         });
         $process->start();
