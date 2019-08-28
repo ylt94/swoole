@@ -21,6 +21,7 @@ class Test{
         //     }
         // });
         $this->processWait();
+        $this->processKill();
         
     }
 
@@ -58,6 +59,19 @@ class Test{
             }
         });
     }
+
+    public function processKill(){
+        $object = $this;
+        //注册信号处理，同步阻塞处理，检测到信号后去杀掉自己的所有子进程
+        \swoole_process::signal(SIGTERM, function ($signo) use ($object){
+            foreach($object::$process as $pid){
+                \swoole_process::kill($pid,SIGKILL);
+            }
+            exit;
+        });
+
+    }
+
 }
 
 $test = new Test();
