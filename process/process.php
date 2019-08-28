@@ -14,21 +14,12 @@ class Test{
             self::$process[$i] = $process->pid;          
         }
         var_dump(self::$process);
-        $kill_msg =  \swoole_process::wait(false);
-        echo '子进程被杀掉，信息：'.var_export($kill_msg,true);
-        $process = self::$process;
-        foreach($process as $i => $pid){
-            if($pid != $kill_msg['pid']){
-                continue;
+        Process::signal(SIGCHLD, function($sig) {
+            //必须为false，非阻塞模式
+            while($ret =  Process::wait(false)) {
+                echo "PID={$ret['pid']}\n";
             }
-            self::$process[$i] = 0;
-            //如果不是kill -9信号，将会重新拉起被杀掉的进程
-            if($kill_msg['signal'] != SIGKILL){
-                $new_process = $this->createMarketProcess($i);
-                self::$process[$i] = $new_process->pid;
-            }
-            break;
-        }
+        });
     }
 
     public function createProcess($i){
