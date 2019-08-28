@@ -42,19 +42,17 @@ class Test{
             while($kill_msg =  \swoole_process::wait(false)) {
                 var_dump('子进程被杀掉，信息：'.var_export($kill_msg,true));
                 $process = $ws_obj::$process;
-                foreach($process as $market => $val){
-                    foreach($val as $key => $pid){
-                        if($pid != $kill_msg['pid']){
-                           continue;
-                        }
-                        unset($ws_obj::$process[$market][$key]);
-                        //如果不是kill -9信号，将会重新拉起被杀掉的进程
-                        if($kill_msg['signal'] != SIGKILL){
-                            $new_process = $ws_obj->createMarketProcess($market);
-                            $ws_obj::$process[$market][] = $new_process->pid;
-                        }
-                        break;
-                    }
+                foreach($process as $i => $pid){
+                    if($pid != $kill_msg['pid']){
+                        continue;
+                     }
+                     $ws_obj::$process[$i] = 0;
+                     //如果不是kill -9信号，将会重新拉起被杀掉的进程
+                     if($kill_msg['signal'] != SIGKILL){
+                         $new_process = $ws_obj->createProcess($i);
+                         $ws_obj::$process[$i] = $new_process->pid;
+                     }
+                     break;
                 }
             }
         });
